@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+
+<body>
+
+<script>
+
+
+// Fonctions pour obtenir le choix du PC via Math.random
+function getComputerChoice() {
+    let randomValue = Math.floor(Math.random() * 100);
+    if (randomValue <= 33){
+        return "rock";
+    }
+    else if (randomValue >= 66){
+        return "scissors"
+
+    }
+    else {
+        return "paper";
+    }
+
+}
+
+// Déclaration de la variable utilisant la function getComputerChoice
+let computerChoice = getComputerChoice();
+
+// Fonction pour obtenir le choix du joueur
+
+// A TERMINER EN PREMIER : function to verify textUserChoice
+function getUserChoice() {
+    let textUserChoice;
+    let valueUserChoice = false;
+    while ( valueUserChoice === false) {
+        textUserChoice = prompt("Choose your weapon ! Rock, paper or scissors ?");
+        textUserChoice = textUserChoice.toLowerCase();
+        if ( textUserChoice !== "rock" || textUserChoice !== "paper" || textUserChoice !== "scissors") {
+        prompt("You have to choose between Rock, paper and scissors.");}
+        else {
+            valueUserChoice = true;
+            return;
+        }
+        }  
+}
+
+// Déclaration de la variable utilisant la function getUserChoice
+let userChoice = getUserChoice();
+
+// Fonction pour jouer un round
+function playRound(userChoice, computerChoice) {
+    computerChoice;
+
+
+    
+    console.log(`You have choose ${userChoice}`);
+    if (userChoice === computerChoice) {
+        userChoice = prompt("TIE ! New round !");
+        return;
+    }
+    else if (userChoice === "rock" && computerChoice === "paper" ) {
+        console.log(userChoice, computerChoice);
+        console.log("I've won ! One point for me !");
+    }
+    else if (userChoice === "rock" && computerChoice === "scissors") {
+        console.log(userChoice, computerChoice);
+        console.log("You won ! One point for you !");
+    }
+}
+
+// Code appelant les fonctions
+/* let startGame = prompt("Do you want to play the game ?")
+if (startGame === "yes") {
+    playRound();
+}
+else {
+    prompt("Coward...");
+}
+*/
+
+
+
+
+</script>
+</body>
+</html>
