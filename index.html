@@ -32,60 +32,103 @@ function getComputerChoice() {
 }
 
 // Déclaration de la variable utilisant la function getComputerChoice
-let computerChoice = getComputerChoice();
+let computerChoice
 
-// Fonction pour obtenir le choix du joueur
-
-// A TERMINER EN PREMIER : function to verify textUserChoice
+// Function to get user choice and verify his choice
 function getUserChoice() {
     let textUserChoice;
     let valueUserChoice = false;
     while ( valueUserChoice === false) {
         textUserChoice = prompt("Choose your weapon ! Rock, paper or scissors ?");
         textUserChoice = textUserChoice.toLowerCase();
-        if ( textUserChoice !== "rock" || textUserChoice !== "paper" || textUserChoice !== "scissors") {
-        prompt("You have to choose between Rock, paper and scissors.");}
+        if ( textUserChoice !== "rock" && textUserChoice !== "paper" && textUserChoice !== "scissors") {
+        alert("You have to choose between Rock, paper and scissors.");}
         else {
             valueUserChoice = true;
-            return;
+            return textUserChoice;
         }
         }  
 }
 
 // Déclaration de la variable utilisant la function getUserChoice
-let userChoice = getUserChoice();
+let userChoice
 
 // Fonction pour jouer un round
 function playRound(userChoice, computerChoice) {
-    computerChoice;
+    console.log("C'est parti pour un nouveau round !");
+    userChoice = getUserChoice();
+    computerChoice = getComputerChoice();
 
-
-    
-    console.log(`You have choose ${userChoice}`);
+    console.log(`You have choose ${userChoice} and I choose ${computerChoice}`);
     if (userChoice === computerChoice) {
-        userChoice = prompt("TIE ! New round !");
+        console.log("TIE ! New round !");
         return;
     }
     else if (userChoice === "rock" && computerChoice === "paper" ) {
-        console.log(userChoice, computerChoice);
+        console.log(userChoice, " VS ", computerChoice);
         console.log("I've won ! One point for me !");
+        return ++computerScore;
     }
     else if (userChoice === "rock" && computerChoice === "scissors") {
-        console.log(userChoice, computerChoice);
+        console.log(userChoice, " VS ", computerChoice);
         console.log("You won ! One point for you !");
+        return ++userScore;
+    }
+    else if (userChoice === "paper" && computerChoice === "rock") {
+        console.log(userChoice, " VS ", computerChoice);
+        console.log("You won ! One point for you !");
+        return ++userScore;
+    }
+    else if (userChoice === "paper" && computerChoice === "scissors") {
+        console.log(userChoice, " VS ", computerChoice);
+        console.log("I've won ! One point for me !");
+        return ++computerScore;
+    }
+    else if (userChoice === "scissors" && computerChoice === "paper") {
+        console.log(userChoice, " VS ", computerChoice);
+        console.log("You won ! One point for you !");
+        return ++userScore;
+    } 
+    else {
+        // Last option : scissors vs rock, computer win
+        console.log(userChoice, " VS ", computerChoice);
+        console.log("I've won ! One point for me !");
+        return ++computerScore;
     }
 }
 
-// Code appelant les fonctions
+//Declaration of variables outside of function to keep scores
+let userScore = 0;
+let computerScore = 0;
 
-/* let startGame = prompt("Do you want to play the game ?")
-if (startGame === "yes") {
-    playRound();
+// Function game() who call other functions to play and take score. 
+function game() {
+let valueGameStarter = false;
+
+while ( valueGameStarter !== true){ 
+let textUserChoice = prompt("Wanna play the game ? Type yes to play !");
+         textUserChoice = textUserChoice.toLowerCase();
+        if ( textUserChoice !== "yes") {
+        alert("You have to choose yes to play, and you will choose it, because that the point of this script, I mean...");}
+        else {
+            valueGameStarter = true;
+            while ( userScore !== 5 && computerScore !== 5) {
+                playRound()  
+                console.log(`Ton score est de ${userScore} et le mien est de ${computerScore}`);             
+        }
+        if (userScore === 5 || computerScore === 5){
+            console.log("La partie est terminée !")
+            console.log(`/!\ Ton score final est de ${userScore} et le mien est de ${computerScore} `)
+        
+        }
+
+        }  
+
 }
-else {
-    prompt("Coward...");
 }
-*/
+
+
+
 
 
 
