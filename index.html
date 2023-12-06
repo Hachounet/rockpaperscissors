@@ -4,32 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
+<body id="body">
+
+    <header id="header">Rocking Papering Scissoring !</header>
+
+    <div id="game-container">
+        <div class="score-container">
+        <p id="score-versus" display="block"></p>
+        <p id="score-final" display="block"></p>
+        <p id="score-text" display="block"></p>
 
 
+        </div>
 
-
-<body>
-
-    <div class="buttons-container">
+        <div class="buttons-container">
         <button class="play-buttons" data-play="rock">ROCK</button>
         <button class="play-buttons" data-play="paper">PAPER</button>
         <button class="play-buttons" data-play="scissors" >SCISSORS</button>
 
+        </div>
     </div>
-
-    <div class="score-container">
-        <p id="score-versus" display="block"></p>
-        <p id="score-final" display="block">FINAL RESULT</p>
-        <p id="score-text" display="block"></p>
-
-
-    </div>
-
 <script>
 
-    var buttons = document.querySelectorAll(".play-buttons")
+    let buttons = document.querySelectorAll(".play-buttons")
+
+
+
 
     function getUserChoice() {
         var action = this.getAttribute("data-play")
@@ -70,47 +73,46 @@ let userChoice
 function playRound(userChoice, computerChoice) {
     var scoreTextLive = document.getElementById("score-text")
     var scoreVersus = document.getElementById("score-versus")
-    scoreTextLive.textContent = "Ok, let's go for a new round !"
    
     computerChoice = getComputerChoice();
 
     scoreVersus.textContent = `You have choose ${userChoice} and I choose ${computerChoice}`;
     if (userChoice === computerChoice) {
         scoreTextLive.textContent = "TIE ! New round !";
-        return;
+        
     }
     else if (userChoice === "rock" && computerChoice === "paper" ) {
         scoreTextLive.textContent = `${userChoice} " VS " ${computerChoice}`;
         scoreTextLive.textContent = "I've won ! One point for me !";
-        return ++computerScore;
+        ++computerScore;
     }
     else if (userChoice === "rock" && computerChoice === "scissors") {
         scoreTextLive.textContent = `${userChoice} " VS " ${computerChoice}`;
         scoreTextLive.textContent ="You won ! One point for you !";
-        return ++userScore;
+        ++userScore;
     }
     else if (userChoice === "paper" && computerChoice === "rock") {
         scoreTextLive.textContent = `${userChoice} " VS " ${computerChoice}`;
         scoreTextLive.textContent = "You won ! One point for you !";
-        return ++userScore;
+        ++userScore;
     }
     else if (userChoice === "paper" && computerChoice === "scissors") {
         scoreTextLive.textContent= `${userChoice} " VS " ${computerChoice}`;
         scoreTextLive.textContent = "I've won ! One point for me !";
-        return ++computerScore;
+        ++computerScore;
     }
     else if (userChoice === "scissors" && computerChoice === "paper") {
         scoreTextLive.textContent= `${userChoice} " VS " ${computerChoice}`;
         scoreTextLive.textContent = "You won ! One point for you !";
-        return ++userScore;
+        ++userScore;
     } 
     else {
         // Last option : scissors vs rock, computer win
         scoreTextLive.textContent= `${userChoice} " VS " ${computerChoice}`;
         scoreTextLive.textContent = "I've won ! One point for me !";
-        return ++computerScore;
+        ++computerScore;
     }
-    
+    game();
 }
 
 //Declaration of variables outside of function to keep scores
@@ -122,13 +124,12 @@ function game() {
 
     var scoreFinal = document.getElementById("score-final")
 
-            if( userScore !== 5 && computerScore !== 5) {
-                playRound()  
+            if( userScore < 5 && computerScore < 5) {  
                 scoreFinal.textContent = `Ton score est de ${userScore} et le mien est de ${computerScore}`;             
         }
-        else if (userScore === 5 || computerScore === 5){
+        else {
             scoreFinal.textContent ="La partie est terminée !";
-            scoreFinal.textContent =`/!\ Ton score final est de ${userScore} et le mien est de ${computerScore} `;
+            scoreFinal.textContent +=`/!\ Ton score final est de ${userScore} et le mien est de ${computerScore} `;
         
         }
 
