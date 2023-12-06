@@ -12,7 +12,38 @@
 
 <body>
 
+    <div class="buttons-container">
+        <button class="play-buttons" data-play="rock">ROCK</button>
+        <button class="play-buttons" data-play="paper">PAPER</button>
+        <button class="play-buttons" data-play="scissors" >SCISSORS</button>
+
+    </div>
+
+    <div class="score-container">
+        <p id="score-versus" display="block"></p>
+        <p id="score-final" display="block">FINAL RESULT</p>
+        <p id="score-text" display="block"></p>
+
+
+    </div>
+
 <script>
+
+    var buttons = document.querySelectorAll(".play-buttons")
+
+    function getUserChoice() {
+        var action = this.getAttribute("data-play")
+        console.log("User choice " + action) 
+        return action;
+    }
+
+    buttons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        var userChoice = getUserChoice.call(this);
+        var computerChoice = getComputerChoice();
+        playRound(userChoice, computerChoice);
+    });
+});
 
 
 // Fonctions pour obtenir le choix du PC via Math.random
@@ -31,70 +62,55 @@ function getComputerChoice() {
 
 }
 
-// Déclaration de la variable utilisant la function getComputerChoice
+
 let computerChoice
-
-// Function to get user choice and verify his choice
-function getUserChoice() {
-    let textUserChoice;
-    let valueUserChoice = false;
-    while ( valueUserChoice === false) {
-        textUserChoice = prompt("Choose your weapon ! Rock, paper or scissors ?");
-        textUserChoice = textUserChoice.toLowerCase();
-        if ( textUserChoice !== "rock" && textUserChoice !== "paper" && textUserChoice !== "scissors") {
-        alert("You have to choose between Rock, paper and scissors.");}
-        else {
-            valueUserChoice = true;
-            return textUserChoice;
-        }
-        }  
-}
-
-// Déclaration de la variable utilisant la function getUserChoice
 let userChoice
 
 // Fonction pour jouer un round
 function playRound(userChoice, computerChoice) {
-    console.log("C'est parti pour un nouveau round !");
-    userChoice = getUserChoice();
+    var scoreTextLive = document.getElementById("score-text")
+    var scoreVersus = document.getElementById("score-versus")
+    scoreTextLive.textContent = "Ok, let's go for a new round !"
+   
     computerChoice = getComputerChoice();
 
-    console.log(`You have choose ${userChoice} and I choose ${computerChoice}`);
+    scoreVersus.textContent = `You have choose ${userChoice} and I choose ${computerChoice}`;
     if (userChoice === computerChoice) {
-        console.log("TIE ! New round !");
+        scoreTextLive.textContent = "TIE ! New round !";
         return;
     }
     else if (userChoice === "rock" && computerChoice === "paper" ) {
-        console.log(userChoice, " VS ", computerChoice);
-        console.log("I've won ! One point for me !");
+        scoreTextLive.textContent = `${userChoice} " VS " ${computerChoice}`;
+        scoreTextLive.textContent = "I've won ! One point for me !";
         return ++computerScore;
     }
     else if (userChoice === "rock" && computerChoice === "scissors") {
-        console.log(userChoice, " VS ", computerChoice);
-        console.log("You won ! One point for you !");
+        scoreTextLive.textContent = `${userChoice} " VS " ${computerChoice}`;
+        scoreTextLive.textContent ="You won ! One point for you !";
         return ++userScore;
     }
     else if (userChoice === "paper" && computerChoice === "rock") {
-        console.log(userChoice, " VS ", computerChoice);
-        console.log("You won ! One point for you !");
+        scoreTextLive.textContent = `${userChoice} " VS " ${computerChoice}`;
+        scoreTextLive.textContent = "You won ! One point for you !";
         return ++userScore;
     }
     else if (userChoice === "paper" && computerChoice === "scissors") {
-        console.log(userChoice, " VS ", computerChoice);
-        console.log("I've won ! One point for me !");
+        scoreTextLive.textContent= `${userChoice} " VS " ${computerChoice}`;
+        scoreTextLive.textContent = "I've won ! One point for me !";
         return ++computerScore;
     }
     else if (userChoice === "scissors" && computerChoice === "paper") {
-        console.log(userChoice, " VS ", computerChoice);
-        console.log("You won ! One point for you !");
+        scoreTextLive.textContent= `${userChoice} " VS " ${computerChoice}`;
+        scoreTextLive.textContent = "You won ! One point for you !";
         return ++userScore;
     } 
     else {
         // Last option : scissors vs rock, computer win
-        console.log(userChoice, " VS ", computerChoice);
-        console.log("I've won ! One point for me !");
+        scoreTextLive.textContent= `${userChoice} " VS " ${computerChoice}`;
+        scoreTextLive.textContent = "I've won ! One point for me !";
         return ++computerScore;
     }
+    
 }
 
 //Declaration of variables outside of function to keep scores
@@ -103,29 +119,21 @@ let computerScore = 0;
 
 // Function game() who call other functions to play and take score. 
 function game() {
-let valueGameStarter = false;
 
-while ( valueGameStarter !== true){ 
-let textUserChoice = prompt("Wanna play the game ? Type yes to play !");
-         textUserChoice = textUserChoice.toLowerCase();
-        if ( textUserChoice !== "yes") {
-        alert("You have to choose yes to play, and you will choose it, because that the point of this script, I mean...");}
-        else {
-            valueGameStarter = true;
-            while ( userScore !== 5 && computerScore !== 5) {
+    var scoreFinal = document.getElementById("score-final")
+
+            if( userScore !== 5 && computerScore !== 5) {
                 playRound()  
-                console.log(`Ton score est de ${userScore} et le mien est de ${computerScore}`);             
+                scoreFinal.textContent = `Ton score est de ${userScore} et le mien est de ${computerScore}`;             
         }
-        if (userScore === 5 || computerScore === 5){
-            console.log("La partie est terminée !")
-            console.log(`/!\ Ton score final est de ${userScore} et le mien est de ${computerScore} `)
+        else if (userScore === 5 || computerScore === 5){
+            scoreFinal.textContent ="La partie est terminée !";
+            scoreFinal.textContent =`/!\ Ton score final est de ${userScore} et le mien est de ${computerScore} `;
         
         }
 
         }  
 
-}
-}
 
 
 
